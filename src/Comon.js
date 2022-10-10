@@ -4,6 +4,7 @@ import axios from "axios"
 import { Helmet } from "react-helmet"
 import JSONPretty from 'react-json-pretty';
 // import EmbedContainer from "react-oembed-container"
+import { Input ,  Button} from 'antd';
 import 'react-json-pretty/themes/monikai.css';
 const API_KEY = "ce85ecff19fbd7dba1cf97"
 
@@ -31,8 +32,11 @@ export default function OEmbed(props) {
                 <center style={{ margin: "50px" }}>
                     <div>
                         <label style={{ marginRight: "10px" }}>URL:</label>
-                        <input type="text" style={{ width: "300px" }} name="url" onChange={(e) => setUrl(e.target.value)} />
-                        <button onClick={submitUrl} style={{ marginLeft: "10px" }}>Submit</button>
+                        <Input placeholder="Enter URL" type="text" style={{ width: "300px" }} name="url" onChange={(e) => setUrl(e.target.value)} />
+                        
+                        
+                        <Button type="primary"  onClick={submitUrl} style={{ marginLeft: "10px" }}>Submit</Button>
+
                     </div>
                 </center>
 
@@ -40,7 +44,7 @@ export default function OEmbed(props) {
                 <JSONPretty data={title} />
                 </div>
 
-                <div style={{ margin: "50px" }}>
+                <div style={{ margin: "50px" }} >
                     <Helmet>
                         <script src="https://cdn.iframe.ly/embed.js" async></script>
                     </Helmet>

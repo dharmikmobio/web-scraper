@@ -1,4 +1,3 @@
-// import logo from './logo.svg';
 import './App.css';
 import Comon from './Comon';
 // import NEW from './NEW';
