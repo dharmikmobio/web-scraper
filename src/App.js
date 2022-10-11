@@ -1,6 +1,6 @@
 import './App.css';
 import Comon from './Comon';
-
+import Iframely from './tes';
 // import NEW from './NEW';
 // import Tabs from './Components/Tab';
 
@@ -8,12 +8,12 @@ function App() {
 
   return (
     <>
-    
-    <Comon/>
-   {/* // <NEW/> */}
-   {/* <Tabs/> */}
-  
-    
+      {/* <Iframely /> */}
+      <Comon/>
+      {/* // <NEW/> */}
+      {/* <Tabs/> */}
+
+
     </>
   );
 }
