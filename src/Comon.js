@@ -9,6 +9,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import 'react-json-pretty/themes/monikai.css';
 import NEW from './NEW';
+import mql from '@microlink/mql';
 
 const API_KEY = "ce85ecff19fbd7dba1cf97"
 
@@ -16,6 +17,7 @@ export default function OEmbed(props) {
     const [url, setUrl] = useState("")
     const [html, setHtml] = useState({ __html: "<div />" })
     const [title, setTitle] = useState()
+    const [da, setDa] = useState()
 
     // useEffect(() => {
     //     axios.get(`https://iframe.ly/api/oembed?url=${url}/&api_key=${API_KEY}&iframe=1&omit_script=1`).then((res) => {
@@ -25,13 +27,17 @@ export default function OEmbed(props) {
     // }, [])
     const submitUrl = async () => {
         const response = await axios.get(`https://iframe.ly/api/oembed?url=${url}/&api_key=${API_KEY}&iframe=1&omit_script=1`)
+        const {  data } = await mql(url)
+
+        console.log("DATA:::->", data)
         console.log("RES", response)
+
         setHtml({ __html: response.data.html })
         setTitle(response.data)
+        setDa(data)
     }
     if (html) {
-        
-        console.log(html, "::::--->>>html")
+        // console.log(html, "::::--->>>html")
         return (
             <>
                 <center style={{ margin: "50px" }}>
@@ -56,7 +62,7 @@ export default function OEmbed(props) {
                     </TabPanel>
                     <TabPanel>
                         <div className="data">
-                            <JSONPretty data={props?.data} />
+                            <JSONPretty data={da} />
                         </div>
                     </TabPanel>
 
@@ -67,6 +73,7 @@ export default function OEmbed(props) {
                         <TabList>
                             <Tab>Iframely</Tab>
                             <Tab>Microlink</Tab>
+                            <Tab>Embed</Tab>
                         </TabList>
                         <TabPanel>
 
@@ -79,6 +86,19 @@ export default function OEmbed(props) {
                         </TabPanel>
                         <TabPanel>
                             <NEW data={url} />
+                        </TabPanel>
+                        <TabPanel>
+
+                            <Helmet>
+                                <script async src={`//cdn.iframe.ly/embed.js?api_key=${API_KEY}`}></script>
+                                {/* <script src="https://cdn.iframe.ly/embed.js" async></script> */}
+                            </Helmet>
+                            <div className="iframely-embed">
+                                <div className="iframely-responsive">
+                                    <a data-iframely-url href={url}></a>
+                                </div>
+                            </div>
+                            {/* <div dangerouslySetInnerHTML={html} /> */}
                         </TabPanel>
                     </Tabs>
                 </div>
