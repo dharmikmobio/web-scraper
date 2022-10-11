@@ -10,6 +10,10 @@
 .data{
   margin: 50px;
 }
+.react-tabs {
+
+  width: 100%!important;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

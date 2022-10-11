@@ -4,8 +4,12 @@ import axios from "axios"
 import { Helmet } from "react-helmet"
 import JSONPretty from 'react-json-pretty';
 // import EmbedContainer from "react-oembed-container"
-import { Input ,  Button} from 'antd';
+import { Input, Button } from 'antd';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 import 'react-json-pretty/themes/monikai.css';
+import NEW from './NEW';
+
 const API_KEY = "ce85ecff19fbd7dba1cf97"
 
 export default function OEmbed(props) {
@@ -26,6 +30,7 @@ export default function OEmbed(props) {
         setTitle(response.data)
     }
     if (html) {
+        
         console.log(html, "::::--->>>html")
         return (
             <>
@@ -33,24 +38,50 @@ export default function OEmbed(props) {
                     <div>
                         <label style={{ marginRight: "10px" }}>URL:</label>
                         <Input placeholder="Enter URL" type="text" style={{ width: "300px" }} name="url" onChange={(e) => setUrl(e.target.value)} />
-                        
-                        
-                        <Button type="primary"  onClick={submitUrl} style={{ marginLeft: "10px" }}>Submit</Button>
+
+
+                        <Button type="primary" onClick={submitUrl} style={{ marginLeft: "10px" }}>Submit</Button>
 
                     </div>
                 </center>
+                <Tabs>
+                    <TabList>
+                        <Tab>Iframely</Tab>
+                        <Tab>Microlink</Tab>
+                    </TabList>
+                    <TabPanel>
+                        <div className="data">
+                            <JSONPretty data={title} />
+                        </div>
+                    </TabPanel>
+                    <TabPanel>
+                        <div className="data">
+                            <JSONPretty data={props?.data} />
+                        </div>
+                    </TabPanel>
 
-                <div className="data">
-                <JSONPretty data={title} />
-                </div>
 
-                <div style={{ margin: "50px" }} >
-                    <Helmet>
-                        <script src="https://cdn.iframe.ly/embed.js" async></script>
-                    </Helmet>
-                    <div dangerouslySetInnerHTML={html} />
+                </Tabs>
+                <div className="container">
+                    <Tabs>
+                        <TabList>
+                            <Tab>Iframely</Tab>
+                            <Tab>Microlink</Tab>
+                        </TabList>
+                        <TabPanel>
+
+                            <div style={{ margin: "50px" }} >
+                                <Helmet>
+                                    <script src="https://cdn.iframe.ly/embed.js" async></script>
+                                </Helmet>
+                                <div dangerouslySetInnerHTML={html} />
+                            </div>
+                        </TabPanel>
+                        <TabPanel>
+                            <NEW data={url} />
+                        </TabPanel>
+                    </Tabs>
                 </div>
-              
             </>
         )
     }
