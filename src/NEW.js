@@ -1,21 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Microlink from '@microlink/react'
-import mql from '@microlink/mql';
 
-const NEW = (props) => {
 
-    useEffect(() => {
-        async function fetchData() {
-            const { data } = await mql(props.data)
-            console.log("DATA:::->", data)
-        }
-        fetchData();
-
-    }, [props])
-
+const NEW = (props) => {  
     return (
-        <Microlink url={props.data} />
+        <Microlink url={props.data} {...props} />
     )
 }
-
 export default NEW
