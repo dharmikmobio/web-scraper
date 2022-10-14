@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@microlink/cards": "^1.13.0",
     "@microlink/mql": "^0.10.28",
     "@microlink/react": "^5.5.9",
     "@testing-library/jest-dom": "^5.16.5",
